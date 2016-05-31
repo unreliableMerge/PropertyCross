@@ -1,4 +1,4 @@
 'use strict';
 
 angular.
-    module('searchingList');
+    module('searchingList', []);
