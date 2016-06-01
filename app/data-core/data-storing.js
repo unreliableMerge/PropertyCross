@@ -1,14 +1,24 @@
 var dataStoring = (function () {
 
     var _data = [];
-    var self = this;
 
-    function _addSearchingResult(value) {
-        _data.push({
-            id: getCurrentId(),
-            searchingResult: value
-        });
+    function _addSearchingResult(value, recentSearchName) {
+        var existence = true;
 
+        _data.every(function (e, index) {
+            if (e.recentSearchName == recentSearchName) {
+                existence = false;
+                return false;
+            }
+        })
+
+        if (existence) {
+            _data.push({
+                id: getCurrentId(),
+                recentSearchName: recentSearchName,
+                searchingResult: value
+            })
+        }
     }
 
     function _removeSearchingResult(id) {
@@ -26,12 +36,10 @@ var dataStoring = (function () {
                 _data[index] = value;
             }
         })
-        console.log('updated:', id);
-        
     }
 
     function _save() {
-        window.localStorage["tasks"] = JSON.stringify(_data, function (key, val) {
+        window.localStorage["searchingResults"] = JSON.stringify(_data, function (key, val) {
             if (key == '$$hashKey') {
                 return undefined;
             }

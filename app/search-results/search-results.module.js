@@ -1,4 +1,4 @@
 'use strict';
 
 angular.
-    module('searchResults',[]);
+    module('searchResults',['dataService']);

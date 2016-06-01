@@ -7,17 +7,17 @@ angular.module('initialState').component('initialState', {
 
         self.searchInput = 'leeds';
         self.noResult = false;
-        self.data = {};
+        self.data = dataStoring.read();
 
         self.goClickHandler = function (input) {
-
-            dataServiceFactory.dataResponse(input).then(function (q) {
-                self.data = q;
+            dataServiceFactory.dataResponse(input).then(function (responsedData) {
+                self.data = responsedData;
 
                 if (self.data.length == 0) {
                     return self.noResult = true;
                 }
-                dataStoring.addSearchingResult(self.data);
+
+                dataStoring.addSearchingResult(self.data, input);
                 dataStoring.save();
                 $location.path('/search-results');
             });

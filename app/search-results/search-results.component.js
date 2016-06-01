@@ -2,10 +2,8 @@
 
 angular.module('searchResults').component('searchResults', {
     templateUrl: 'search-results/search-results.template.html',
-    controller: function SearchingController($http) {
-        var self = this;
-        
-
+    controller: function SearchingController($http, $locale, dataServiceFactory) {
+        var self = this;        
+        self.data = dataServiceFactory.responsedData();
     }
-
 });

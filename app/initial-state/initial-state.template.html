@@ -34,10 +34,7 @@
                         Recent search:
                     </h4>
                     <select multiple="false" class="form-control">
-                        <option>Search 1</option>
-                        <option>Search 2</option>
-                        <option>Search 3</option>
-                        <option>Search 4</option>
+                        <option ng-repeat="item in $ctrl.data">{{item.recentSearchName}} ({{item.searchingResult.length}})</option>
                     </select>
                 </div>
                 <div ng-if="$ctrl.noResult == true">
