@@ -2,6 +2,8 @@
 
 angular.module('propertyCrossWebApp', [
     'ngRoute',
-    'initialState'
+    'initialState',
+    'searchResults'
+
 ]);
 

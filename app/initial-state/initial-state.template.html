@@ -22,19 +22,27 @@
                 <input type="text" class="form-control" focus="true" placeholder="Search for..." ng-model="$ctrl.searchInput"/>
 
                 <div style="margin-top: 20px;">
-                    <button class="btn btn-primary col-lg-1" style="margin-right: 10px" ng-click="$ctrl.goClickHandler($ctrl.searchInput)">Go</button>
-                    <button class="btn btn-primary col-lg-2" ng-click="$ctrl.myLocationClickHandler()">My location</button>
-                    <span>{{$ctrl.data.length}}</span>
+                    <button class="btn btn-primary col-lg-1" style="margin-right: 10px"
+                            ng-click="$ctrl.goClickHandler($ctrl.searchInput)">Go
+                    </button>
+                    <button class="btn btn-primary col-lg-2" ng-click="$ctrl.myLocationClickHandler()">My location
+                    </button>
                 </div>
-                <h4 style="margin-top: 80px">
-                    Recent search:
-                </h4>
-                <select multiple="false" class="form-control">
-                    <option>Search 1</option>
-                    <option>Search 2</option>
-                    <option>Search 3</option>
-                    <option>Search 4</option>
-                </select>
+
+                <div ng-if="$ctrl.noResult == false">
+                    <h4 style="margin-top: 80px">
+                        Recent search:
+                    </h4>
+                    <select multiple="false" class="form-control">
+                        <option>Search 1</option>
+                        <option>Search 2</option>
+                        <option>Search 3</option>
+                        <option>Search 4</option>
+                    </select>
+                </div>
+                <div ng-if="$ctrl.noResult == true">
+                    <h4 style="margin-top: 80px">There was a problem with your search</h4>
+                </div>
             </div>
         </div>
     </div>

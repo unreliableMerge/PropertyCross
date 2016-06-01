@@ -2,23 +2,29 @@
 
 angular.module('initialState').component('initialState', {
     templateUrl: 'initial-state/initial-state.template.html',
-    controller: function SearchingController($http) {
+    controller: function InitialStateController($http, $location, dataServiceFactory) {
         var self = this;
-        self.searchInput = 'leeds';
-        self.goClickHandler = function (input) {
-            $http.jsonp('http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&place_name=' +
-                self.searchInput + '&callback=JSON_CALLBACK').then(function (response) {
-                self.data = response.data.response.listings;
-            });
-            self.myLocationClickHandler = function () {
 
-            };
-            //.
-            // then(function(response) {
-            //    // self.phones = response.data;
-            // });
+        self.searchInput = 'leeds';
+        self.noResult = false;
+        self.data = {};
+
+        self.goClickHandler = function (input) {
+
+            dataServiceFactory.dataResponse(input).then(function (q) {
+                self.data = q;
+
+                if (self.data.length == 0) {
+                    return self.noResult = true;
+                }
+                dataStoring.addSearchingResult(self.data);
+                dataStoring.save();
+                $location.path('/search-results');
+            });
         };
 
-    }
+        self.myLocationClickHandler = function () {
 
+        };
+    }
 });
