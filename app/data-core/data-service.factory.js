@@ -18,15 +18,13 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
             responsedData: function () {
                 if (searchingData.length == 0) {
                     var takeFromLocaleStorage = dataStoring.read();
-                    $http.jsonp('http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&place_name=' +
+                    return $http.jsonp('http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&place_name=' +
                             takeFromLocaleStorage[takeFromLocaleStorage.length - 1].recentSearchName + '&callback=JSON_CALLBACK')
                         .then(function (response) {
                             searchingData = response.data.response.listings;
-
+                            return searchingData;
                         });
-                    return searchingData;
                 }
-
                 return searchingData;
             }
         };
