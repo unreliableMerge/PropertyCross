@@ -19,6 +19,7 @@ var dataStoring = (function () {
                 searchingResult: value
             })
         }
+        _save.call(this);
     }
 
     function _removeSearchingResult(id) {
@@ -27,7 +28,7 @@ var dataStoring = (function () {
                 _data.splice(index, 1);
             }
         })
-
+        _save.call(this);
     }
 
     function _updateSearchingResult(id, value) {
@@ -36,6 +37,7 @@ var dataStoring = (function () {
                 _data[index] = value;
             }
         })
+        _save.call(this);
     }
 
     function _save() {
@@ -71,13 +73,47 @@ var dataStoring = (function () {
         else return _data[_data.length - 1].id + 1;
     }
 
+    var _inputRequests = [];
+
+    function _addInputRequest(value) {
+        _inputRequests.push({
+            id: getCurrentId(),
+            requestName: value
+        })
+        _saveInputRequest.call(this);
+    }
+
+    function _saveInputRequest() {
+        window.localStorage["inputRequests"] = JSON.stringify(_inputRequests, function (key, val) {
+            if (key == '$$hashKey') {
+                return undefined;
+            }
+            return val
+        });
+    }
+
+    function _readInputRequest() {
+        var temp = window.localStorage["inputRequests"]
+
+        if (!temp) _inputRequests = [];
+        else {
+            _inputRequests = JSON.parse(temp);
+            dateStringToObject(_inputRequests);
+        }
+        return _inputRequests;
+    }
+
     return {
         data: _data,
+        inputRequests: _inputRequests,
         addSearchingResult: _addSearchingResult,
         updateSearchingResult: _updateSearchingResult,
         removeSearchingResult: _removeSearchingResult,
         save: _save,
-        read: _read
+        read: _read,
+        addInputRequest: _addInputRequest,
+        saveInputRequest: _saveInputRequest,
+        readInputRequest: _readInputRequest
     };
 
 })();

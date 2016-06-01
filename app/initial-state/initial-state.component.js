@@ -18,7 +18,6 @@ angular.module('initialState').component('initialState', {
                 }
 
                 dataStoring.addSearchingResult(self.data, input);
-                dataStoring.save();
                 $location.path('/search-results');
             });
         };
