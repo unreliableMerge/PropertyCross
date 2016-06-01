@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="text-center">Property Cross
+                <button class="btn btn-primary pull-right">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Faves
+                </button>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12" style="margin-right: 90px;">
+            <h3 style="text-align: justify">
+                Use the form below to search for houses to buy. You can search by place-name, postcode, or click "My
+                location", to search in your current location.
+            </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12" style="margin-right: 90px;">
+            <div class="well">
+                <input type="text" class="form-control" focus="true" placeholder="Search for..." ng-model="$ctrl.searchInput"/>
+
+                <div style="margin-top: 20px;">
+                    <button class="btn btn-primary col-lg-1" style="margin-right: 10px" ng-click="$ctrl.goClickHandler($ctrl.searchInput)">Go</button>
+                    <button class="btn btn-primary col-lg-2" ng-click="$ctrl.myLocationClickHandler()">My location</button>
+                    <span>{{$ctrl.data.length}}</span>
+                </div>
+                <h4 style="margin-top: 80px">
+                    Recent search:
+                </h4>
+                <select multiple="false" class="form-control">
+                    <option>Search 1</option>
+                    <option>Search 2</option>
+                    <option>Search 3</option>
+                    <option>Search 4</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+</div>

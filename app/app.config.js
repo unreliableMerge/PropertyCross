@@ -6,8 +6,8 @@ config(['$locationProvider', '$routeProvider',
     function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
     $routeProvider.
-    when('/searching-list', {
-        template: '<searching-list></searching-list>'
+    when('/initial-state', {
+        template: '<initial-state></initial-state>'
     }).
-    otherwise({redirectTo: '/searching-list'});
+    otherwise({redirectTo: '/initial-state'});
 }]);
