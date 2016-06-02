@@ -15,21 +15,21 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
                     inputSearch + '&callback=JSON_CALLBACK')
                 .then(function (response) {
                     searchingData.responsedData = response.data.response.listings;
-
-                    dataStoring.addInputRequest(inputSearch,
-                        response.data.response.page,
-                        response.data.response.total_pages,
-                        response.data.response.total_results,
-                        response.data.response.locations[response.data.response.locations.length - 1].title
-                    );
-                    searchingData.commonPageInformation = ({
-                        recentSearchName: inputSearch,
-                        currentPage: response.data.response.page,
-                        totalPages: response.data.response.total_pages,
-                        totalResults: response.data.response.total_results,
-                        currentCity: response.data.response.locations[response.data.response.locations.length - 1].title
-                    });
-
+                    if (searchingData.responsedData.length > 0 ) {
+                        dataStoring.addInputRequest(inputSearch,
+                            response.data.response.page,
+                            response.data.response.total_pages,
+                            response.data.response.total_results,
+                            response.data.response.locations[response.data.response.locations.length - 1].title
+                        );
+                        searchingData.commonPageInformation = ({
+                            recentSearchName: inputSearch,
+                            currentPage: response.data.response.page,
+                            totalPages: response.data.response.total_pages,
+                            totalResults: response.data.response.total_results,
+                            currentCity: response.data.response.locations[response.data.response.locations.length - 1].title
+                        });
+                    }
                     return searchingData;
                 });
         };
