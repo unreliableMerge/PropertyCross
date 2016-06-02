@@ -9,7 +9,7 @@ angular.module('initialState').component('initialState', {
         self.noResult = false;
         self.data = {
             responsedData: [],
-            pagingInformation: dataStoring.readInputRequest()
+            commonPageInformation: dataStoring.readInputRequest()
         } 
 
         self.goClickHandler = function (input) {

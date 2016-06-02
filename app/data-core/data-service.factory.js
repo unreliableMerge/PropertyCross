@@ -5,12 +5,14 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
     function ($http) {
         var searchingData = {
             responsedData: [],
-            pagingInformation: {}
+            commonPageInformation: {}
         };
+
+        var takeFromLocaleStorage = dataStoring.readInputRequest();
 
         var _dataResponse = function (inputSearch) {
             return $http.jsonp('http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&place_name=' +
-                inputSearch + '&callback=JSON_CALLBACK')
+                    inputSearch + '&callback=JSON_CALLBACK')
                 .then(function (response) {
                     searchingData.responsedData = response.data.response.listings;
 
@@ -20,7 +22,7 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
                         response.data.response.total_results,
                         response.data.response.locations[response.data.response.locations.length - 1].title
                     );
-                    searchingData.pagingInformation = ({
+                    searchingData.commonPageInformation = ({
                         recentSearchName: inputSearch,
                         currentPage: response.data.response.page,
                         totalPages: response.data.response.total_pages,
@@ -34,12 +36,11 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
 
         var _responsedData = function () {
             if (searchingData.responsedData.length == 0) {
-                var takeFromLocaleStorage = dataStoring.readInputRequest();
                 return $http.jsonp('http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&place_name=' +
-                    takeFromLocaleStorage[takeFromLocaleStorage.length - 1].requestName + '&callback=JSON_CALLBACK')
+                        takeFromLocaleStorage[takeFromLocaleStorage.length - 1].requestName + '&callback=JSON_CALLBACK')
                     .then(function (response) {
                         searchingData.responsedData = response.data.response.listings;
-                        searchingData.pagingInformation = takeFromLocaleStorage[takeFromLocaleStorage.length - 1];
+                        searchingData.commonPageInformation = takeFromLocaleStorage[takeFromLocaleStorage.length - 1];
                         return searchingData;
                     });
             }
@@ -49,31 +50,30 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
         var _getResponsedDataByIndex = function (index) {
             var _data = {
                 responsedData: {},
-                pagingInformation: {}
+                commonPageInformation: {}
             };
-            var _responsedData1 = _responsedData();
-                _responsedData1.then(function (response) {
 
-                _data.responsedData = response.data.response.listings[index];
-                _data.pagingInformation = takeFromLocaleStorage[takeFromLocaleStorage.length - 1];
+            if (searchingData.responsedData.length > 0 && searchingData.responsedData.length > index) {
+                _data.responsedData = searchingData.responsedData[index];
+                _data.commonPageInformation = searchingData.commonPageInformation;
                 return _data;
-
-                // } else {
-                //     return _responsedData.then(function (responsedData) {
-                //             return responsedData.responsedData[index];
-                //         });
-                //
-                // }
-                // ;
-
-            })};
-
-
-            return {
-                dataResponse: _dataResponse,
-                responsedData: _responsedData,
-                getResponsedDataByIndex: _getResponsedDataByIndex
             }
+            else {
+                return $http.jsonp('http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&place_name=' +
+                        takeFromLocaleStorage[takeFromLocaleStorage.length - 1].requestName + '&callback=JSON_CALLBACK')
+                    .then(function (response) {
+                        _data.responsedData = response.data.response.listings[index];
+                        _data.commonPageInformation = takeFromLocaleStorage[takeFromLocaleStorage.length - 1];
+                        return _data;
+                    });
+            }
+        };
 
+        return {
+            dataResponse: _dataResponse,
+            responsedData: _responsedData,
+            getResponsedDataByIndex: _getResponsedDataByIndex
         }
-        ]);
+
+    }
+]);

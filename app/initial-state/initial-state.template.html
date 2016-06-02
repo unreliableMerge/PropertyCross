@@ -34,7 +34,7 @@
                         Recent search:
                     </h4>
                     <select multiple="false" class="form-control">
-                        <option ng-repeat="item in $ctrl.data.pagingInformation">{{item.requestName}} ({{item.totalResults}})</option>
+                        <option ng-repeat="item in $ctrl.data.commonPageInformation">{{item.requestName}} ({{item.totalResults}})</option>
                     </select>
                 </div>
                 <div ng-if="$ctrl.noResult == true">

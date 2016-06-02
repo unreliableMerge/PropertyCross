@@ -15,13 +15,28 @@
 
     <div class="row">
         <div class="well col-lg-12" style="margin-right: 90px;">
-            <img src="{{$ctrl.data.responsedData[$routeParams.index].img_url}}" class="col-lg-3"/>
-            <div class="col-lg-9">
-                <span><h3>{{$ctrl.data.responsedData[$routeParams.index].price_formatted}}</h3></span>
-                <span>{{$ctrl.data.responsedData[$routeParams.index].title}}, {{$ctrl.data.pagingInformation.title}}</span>
+            <div class="col-lg-5">
+                <img src="{{$ctrl.data.responsedData.img_url}}" class="img-rounded"/>
+            </div>
 
+            <div class="col-lg-7">
+                <h3>{{$ctrl.data.responsedData.price_formatted}}</h3>
+                <h4>{{$ctrl.data.responsedData.title}}, {{$ctrl.data.commonPageInformation.currentCity}}</h4>
 
-                <p>{{$ctrl.data.responsedData[$routeParams.index].summary}}</p>
+                <p>
+                    {{$ctrl.data.responsedData.bedroom_number >= 2 ?
+                    $ctrl.data.responsedData.bedroom_number.toString() + ' beds' :
+                    $ctrl.data.responsedData.bedroom_number.toString() + ' bed'}},
+                    {{$ctrl.data.responsedData.bathroom_number >= 2 ?
+                    $ctrl.data.responsedData.bathroom_number.toString() + ' bathrooms' :
+                    $ctrl.data.responsedData.bathroom_number.toString() + ' bathroom'}}
+                </p>
+
+                <p/>
+
+                <p>
+                    {{$ctrl.data.responsedData.summary}}
+                </p>
             </div>
         </div>
     </div>
