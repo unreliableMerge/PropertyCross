@@ -12,5 +12,8 @@ config(['$locationProvider', '$routeProvider',
         .when('/search-results', {
         template: '<search-results></search-results>'
     })
+        .when('/result-details/:index', {
+            template: '<result-details></result-details>'
+        })
         .otherwise({redirectTo: '/initial-state'});
 }]);

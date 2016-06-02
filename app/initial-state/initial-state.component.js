@@ -7,23 +7,23 @@ angular.module('initialState').component('initialState', {
 
         self.searchInput = 'leeds';
         self.noResult = false;
-        self.data = dataStoring.read();
+        self.data = {
+            responsedData: [],
+            pagingInformation: dataStoring.readInputRequest()
+        } 
 
         self.goClickHandler = function (input) {
             dataServiceFactory.dataResponse(input).then(function (responsedData) {
                 self.data = responsedData;
 
-                if (self.data.length == 0) {
+                if (self.data.responsedData.length == 0) {
                     return self.noResult = true;
-                }
-
-                dataStoring.addSearchingResult(self.data, input);
+                }              
+                
                 $location.path('/search-results');
             });
         };
 
-        self.myLocationClickHandler = function () {
-
-        };
+        self.myLocationClickHandler = function () {        };
     }
 });

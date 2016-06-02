@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="text-center">
+                <button class="btn btn-primary pull-left">
+                    <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Back
+                </button>
+                {{$ctrl.data.length}} matches
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="well col-lg-12" style="margin-right: 90px;" ng-repeat="dataItem in $ctrl.data">
+            <img src="{{dataItem.img_url}}" width="35%" height="35%" class="col-lg-3"/>
+            <div class="col-lg-9">
+                <span><h3>{{dataItem.title}}</h3></span>
+                <span><h4><a href="{{dataItem.lister_url}}">{{dataItem.lister_name}}</a></h4></span>
+                <span>{{dataItem.price_formatted}}</span>
+                <p>{{dataItem.summary}}</p>
+            </div>
+        </div>
+    </div>
+
+
+</div>

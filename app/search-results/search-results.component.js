@@ -5,12 +5,17 @@ angular.module('searchResults').component('searchResults', {
     controller: function SearchingController($http, $locale, dataServiceFactory) {
         var self = this;
 
-          self.data = dataServiceFactory.responsedData();
+        self.data = dataServiceFactory.responsedData();
 
-        if (self.data.length == 0 || self.data.length == undefined) {
+        if (self.data.responsedData == undefined) {
             dataServiceFactory.responsedData().then(function (responsedData) {
                 self.data = responsedData;
             });
+        }
+
+        self.moreDetails = function (index) {
+            console.log(index);
+            $location.path('/search-results');
         }
 
     }

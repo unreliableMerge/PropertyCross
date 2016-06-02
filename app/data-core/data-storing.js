@@ -75,11 +75,25 @@ var dataStoring = (function () {
 
     var _inputRequests = [];
 
-    function _addInputRequest(value) {
-        _inputRequests.push({
-            id: getCurrentId(),
-            requestName: value
+    function _addInputRequest(requestName, currentPage, totalPages, totalResults) {
+        var existence = true;
+
+        _inputRequests.every(function (e, index) {
+            if (e.requestName == requestName) {
+                existence = false;
+                return false;
+            }
         })
+
+        if (existence) {
+            _inputRequests.push({
+                id: getCurrentInputRequestId(),
+                requestName: requestName,
+                currentPage: currentPage,
+                totalPages: totalPages,
+                totalResults: totalResults
+            })
+        }
         _saveInputRequest.call(this);
     }
 
@@ -98,9 +112,13 @@ var dataStoring = (function () {
         if (!temp) _inputRequests = [];
         else {
             _inputRequests = JSON.parse(temp);
-            dateStringToObject(_inputRequests);
         }
         return _inputRequests;
+    }
+
+    function getCurrentInputRequestId() {
+        if (!_inputRequests || _inputRequests.length == 0) return 0;
+        else return _inputRequests[_inputRequests.length - 1].id + 1;
     }
 
     return {

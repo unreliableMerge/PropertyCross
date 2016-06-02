@@ -5,15 +5,21 @@
                 <button class="btn btn-primary pull-left">
                     <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Back
                 </button>
-               {{$ctrl.data.length}} matches
+                {{$ctrl.data.pagingInformation.totalResults}} matches
             </h1>
         </div>
     </div>
 
-    <div class="row" >
-        <div class="well col-lg-12" style="margin-right: 90px;" ng-repeat="dataItem in $ctrl.data">
-            <img src="{{dataItem.img_url}}" width="35%" height="35%"/>
-            <span>{{dataItem.price_formatted}}</span>
+    <div class="row">
+        <div class="well col-lg-12" style="margin-right: 90px;" ng-repeat="dataItem in $ctrl.data.responsedData">
+            <img src="{{dataItem.img_url}}" class="col-lg-3" width="10%" height="10%" />
+            <div class="col-lg-9 form-group">
+                <span><h3>{{dataItem.price_formatted}}</h3></span>
+                <span><h4>{{dataItem.title}}</h4></span>
+                <p>{{dataItem.summary}}</p>
+
+                <span><a href="#!/result-details/{{$index}}">More details...</a></span>
+            </div>
         </div>
     </div>
 
