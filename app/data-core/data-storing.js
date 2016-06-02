@@ -75,7 +75,7 @@ var dataStoring = (function () {
 
     var _inputRequests = [];
 
-    function _addInputRequest(requestName, currentPage, totalPages, totalResults) {
+    function _addInputRequest(requestName, currentPage, totalPages, totalResults, currentCity) {
         var existence = true;
 
         _inputRequests.every(function (e, index) {
@@ -91,7 +91,8 @@ var dataStoring = (function () {
                 requestName: requestName,
                 currentPage: currentPage,
                 totalPages: totalPages,
-                totalResults: totalResults
+                totalResults: totalResults,
+                currentCity: currentCity
             })
         }
         _saveInputRequest.call(this);

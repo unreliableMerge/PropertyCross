@@ -12,11 +12,5 @@ angular.module('searchResults').component('searchResults', {
                 self.data = responsedData;
             });
         }
-
-        self.moreDetails = function (index) {
-            console.log(index);
-            $location.path('/search-results');
-        }
-
     }
 });
