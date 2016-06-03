@@ -4,6 +4,7 @@ angular.module('propertyCrossWebApp', [
     'ngRoute',
     'initialState',
     'searchResults',
-    'resultDetails'
+    'resultDetails',
+    'favouritesList'
 ]);
 

@@ -9,8 +9,7 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
         };
 
 
-        var _dataResponse = function (inputSearch, pageNumber) {
-            var takeFromLocaleStorage = dataStoring.readInputRequest();
+        var _dataResponse = function (inputSearch, pageNumber) {            
             var requestName = inputSearch;
             return $http.jsonp('http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=' + pageNumber +
                 '&place_name=' + requestName + '&callback=JSON_CALLBACK')

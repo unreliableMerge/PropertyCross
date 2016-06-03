@@ -12,6 +12,11 @@ angular.module('initialState').component('initialState', {
             commonPageInformation: dataStoring.readInputRequest()
         } 
 
+
+        self.favesClickHandler = function () {
+            $location.path('/favourites-list');
+        }
+        
         self.goClickHandler = function (input) {
             dataServiceFactory.dataResponse(input).then(function (responsedData) {
                 self.data = responsedData;

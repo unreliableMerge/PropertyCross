@@ -15,5 +15,8 @@ config(['$locationProvider', '$routeProvider',
             .when('/result-details/:index', {
                 template: '<result-details></result-details>'
             })
+            .when('/favourites-list', {
+              template: '<favourites-list></favourites-list>'
+            })
             .otherwise({redirectTo: '/initial-state'});
     }]);
