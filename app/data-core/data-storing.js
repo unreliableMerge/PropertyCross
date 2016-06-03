@@ -76,16 +76,20 @@ var dataStoring = (function () {
     var _inputRequests = [];
 
     function _addInputRequest(requestName, currentPage, totalPages, totalResults, currentCity) {
-        var existence = true;
+        var nonExisted = true;
 
         _inputRequests.every(function (e, index) {
             if (e.requestName == requestName) {
-                existence = false;
+                nonExisted = false;
+                if (e.currentPage != currentPage) {
+                    e.currentPage = currentPage;
+                    _updateInputRequest(e.id, e);
+                }
                 return false;
             }
         })
 
-        if (existence) {
+        if (nonExisted) {
             _inputRequests.push({
                 id: getCurrentInputRequestId(),
                 requestName: requestName,
@@ -95,6 +99,15 @@ var dataStoring = (function () {
                 currentCity: currentCity
             })
         }
+        _saveInputRequest.call(this);
+    }
+
+    function _updateInputRequest(id, value) {
+        _inputRequests.forEach(function (e, index) {
+            if (e.id == id) {
+                _inputRequests[index] = value;
+            }
+        })
         _saveInputRequest.call(this);
     }
 
@@ -131,6 +144,7 @@ var dataStoring = (function () {
         save: _save,
         read: _read,
         addInputRequest: _addInputRequest,
+        updateInputRequest: _updateInputRequest,
         saveInputRequest: _saveInputRequest,
         readInputRequest: _readInputRequest
     };

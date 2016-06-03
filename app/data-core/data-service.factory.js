@@ -10,12 +10,12 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
 
         var takeFromLocaleStorage = dataStoring.readInputRequest();
 
-        var _dataResponse = function (inputSearch) {
-            return $http.jsonp('http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&place_name=' +
+        var _dataResponse = function (inputSearch, pageNumber) {
+            return $http.jsonp('http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=' + pageNumber + '&place_name=' +
                     inputSearch + '&callback=JSON_CALLBACK')
                 .then(function (response) {
                     searchingData.responsedData = response.data.response.listings;
-                    if (searchingData.responsedData.length > 0 ) {
+                    if (searchingData.responsedData.length > 0) {
                         dataStoring.addInputRequest(inputSearch,
                             response.data.response.page,
                             response.data.response.total_pages,

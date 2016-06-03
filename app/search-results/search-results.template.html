@@ -10,14 +10,17 @@
         <div class="col-lg-12">
             <h3 class="text-center">
                 <button class="btn btn-default btn-sm"
-                        ng-disabled="$ctrl.data.commonPageInformation.currentPage == 1 ? true : false ">
+                        ng-disabled="$ctrl.data.commonPageInformation.currentPage == 1 ? true : false "
+                        ng-click="$ctrl.paginationButtonClickHandler($ctrl.data.commonPageInformation.currentPage-1)">
                     <span class="glyphicon glyphicon-step-backward" aria-hidden="true"/>
                 </button>
 
-                {{$ctrl.data.responsedData.length}} of {{$ctrl.data.commonPageInformation.totalResults}} matches
+                {{$ctrl.data.responsedData.length * $ctrl.data.commonPageInformation.currentPage}} of
+                {{$ctrl.data.commonPageInformation.totalResults}} matches
 
                 <button class="btn btn-default btn-sm"
-                        ng-disabled="$ctrl.data.commonPageInformation.currentPage == $ctrl.data.commonPageInformation.totalPages ? true : false">
+                        ng-disabled="$ctrl.data.commonPageInformation.currentPage == $ctrl.data.commonPageInformation.totalPages ? true : false"
+                        ng-click="$ctrl.paginationButtonClickHandler($ctrl.data.commonPageInformation.currentPage+1)">
                     <span class="glyphicon glyphicon-step-forward" aria-hidden="true"/>
                 </button>
             </h3>
