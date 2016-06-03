@@ -23,6 +23,5 @@ angular.module('searchResults').component('searchResults', {
                 }
             )
         }
-
     }
 });

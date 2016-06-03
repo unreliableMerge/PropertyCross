@@ -15,11 +15,11 @@
                     <span class="glyphicon glyphicon-step-backward" aria-hidden="true"/>
                 </button>
 
-                {{$ctrl.data.responsedData.length * $ctrl.data.commonPageInformation.currentPage}} of
+                {{($ctrl.data.commonPageInformation.resultsOnPage + $ctrl.data.commonPageInformation.offset)}} of
                 {{$ctrl.data.commonPageInformation.totalResults}} matches
 
                 <button class="btn btn-default btn-sm"
-                        ng-disabled="$ctrl.data.commonPageInformation.currentPage == $ctrl.data.commonPageInformation.totalPages ? true : false"
+                        ng-disabled="$ctrl.data.commonPageInformation.currentPage == $ctrl.data.commonPageInformation.totalPages+1 ? true : false"
                         ng-click="$ctrl.paginationButtonClickHandler($ctrl.data.commonPageInformation.currentPage+1)">
                     <span class="glyphicon glyphicon-step-forward" aria-hidden="true"/>
                 </button>

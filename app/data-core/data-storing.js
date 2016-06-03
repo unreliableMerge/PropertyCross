@@ -75,17 +75,16 @@ var dataStoring = (function () {
 
     var _inputRequests = [];
 
-    function _addInputRequest(requestName, currentPage, totalPages, totalResults, currentCity) {
+    function _addInputRequest(requestName, currentPage, totalPages, totalResults, currentCity, offset, resultsOnPage) {
         var nonExisted = true;
 
-        _inputRequests.every(function (e, index) {
+        _inputRequests.forEach(function (e, index) {
             if (e.requestName == requestName) {
                 nonExisted = false;
                 if (e.currentPage != currentPage) {
                     e.currentPage = currentPage;
                     _updateInputRequest(e.id, e);
                 }
-                return false;
             }
         })
 
@@ -96,7 +95,9 @@ var dataStoring = (function () {
                 currentPage: currentPage,
                 totalPages: totalPages,
                 totalResults: totalResults,
-                currentCity: currentCity
+                currentCity: currentCity,
+                offset: parseInt(offset),
+                resultsOnPage: parseInt(resultsOnPage)
             })
         }
         _saveInputRequest.call(this);
