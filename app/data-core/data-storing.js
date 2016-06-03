@@ -1,47 +1,42 @@
 var dataStoring = (function () {
 
-    var _data = [];
+    var _favouritesItems = [];
+    var _inputRequests = [];
 
-    function _addSearchingResult(value, recentSearchName) {
-        var existence = true;
-
-        _data.every(function (e, index) {
-            if (e.recentSearchName == recentSearchName) {
-                existence = false;
-                return false;
-            }
+    function _addFavouritesItem(price, location, city, beds, bathrooms, summary, img) {
+        _favouritesItems.push({
+            id: getCurrentFavouritesItemId(),
+            price: price,
+            location: location,
+            city: city,
+            beds: beds,
+            bathrooms: bathrooms,
+            summary: summary,
+            img: img
         })
-
-        if (existence) {
-            _data.push({
-                id: getCurrentId(),
-                recentSearchName: recentSearchName,
-                searchingResult: value
-            })
-        }
-        _save.call(this);
+        _saveFavouritesItem.call(this);
     }
 
-    function _removeSearchingResult(id) {
-        _data.forEach(function (e, index) {
+    function _deleteFavouritesItem(id) {
+        _favouritesItems.forEach(function (e, index) {
             if (e.id == id) {
-                _data.splice(index, 1);
+                _favouritesItems.splice(index, 1);
             }
         })
-        _save.call(this);
+        _saveFavouritesItem.call(this);
     }
 
-    function _updateSearchingResult(id, value) {
-        _data.forEach(function (e, index) {
+    function _updateFavouritesItem(id, value) {
+        _favouritesItems.forEach(function (e, index) {
             if (e.id == id) {
-                _data[index] = value;
+                _favouritesItems[index] = value;
             }
         })
-        _save.call(this);
+        _saveFavouritesItem.call(this);
     }
 
-    function _save() {
-        window.localStorage["searchingResults"] = JSON.stringify(_data, function (key, val) {
+    function _saveFavouritesItem() {
+        window.localStorage["favouritesItems"] = JSON.stringify(_favouritesItems, function (key, val) {
             if (key == '$$hashKey') {
                 return undefined;
             }
@@ -49,33 +44,23 @@ var dataStoring = (function () {
         });
     }
 
-    function dateStringToObject(data) {
-        for (var i = 0; i < data.length; i++) {
-            data[i].duedate = new Date(data[i].duedate);
-        }
-        return data;
-    }
+    function _getFromStorageFavouritesItems() {
+        var temp = window.localStorage["favouritesItems"]
 
-
-    function _read() {
-        var temp = window.localStorage["searchingResults"]
-
-        if (!temp) _data = [];
+        if (!temp) _favouritesItems = [];
         else {
-            _data = JSON.parse(temp);
-            dateStringToObject(_data);
+            _favouritesItems = JSON.parse(temp);
         }
-        return _data;
+        return _favouritesItems;
     }
 
-    function getCurrentId() {
-        if (!_data || _data.length == 0) return 0;
-        else return _data[_data.length - 1].id + 1;
+    function getCurrentFavouritesItemId() {
+        if (!_favouritesItems || _favouritesItems.length == 0) return 0;
+        else return _favouritesItems[_favouritesItems.length - 1].id + 1;
     }
 
-    var _inputRequests = [];
-
-    function _addInputRequest(requestName, currentPage, totalPages, totalResults, currentCity, offset, resultsOnPage) {
+    function _addInputRequest(requestName, currentPage, totalPages,
+                              totalResults, currentCity, offset, resultsOnPage) {
         var nonExisted = true;
 
         _inputRequests.forEach(function (e, index) {
@@ -137,17 +122,16 @@ var dataStoring = (function () {
     }
 
     return {
-        data: _data,
+        favouritesItems: _favouritesItems,
         inputRequests: _inputRequests,
-        addSearchingResult: _addSearchingResult,
-        updateSearchingResult: _updateSearchingResult,
-        removeSearchingResult: _removeSearchingResult,
-        save: _save,
-        read: _read,
+        addFavouritesItem: _addFavouritesItem,
+        updateSearchingResult: _updateFavouritesItem,
+        removeSearchingResult: _deleteFavouritesItem,
+        saveFavouritesItem: _saveFavouritesItem,
+        getFromStorageFavouritesItems: _getFromStorageFavouritesItems,
         addInputRequest: _addInputRequest,
         updateInputRequest: _updateInputRequest,
         saveInputRequest: _saveInputRequest,
         readInputRequest: _readInputRequest
     };
-
 })();

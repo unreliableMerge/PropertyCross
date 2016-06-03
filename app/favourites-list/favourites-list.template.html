@@ -10,12 +10,12 @@
         </div>
     </div>
     <div class="row">
-        <div class="well col-lg-12" style="margin-right: 90px;" ng-repeat="dataItem in $ctrl.data.responsedData">
+        <div class="well col-lg-12" style="margin-right: 90px;" ng-repeat="dataItem in $ctrl.data">
             <div class="col-lg-3">
-                <img src="{{dataItem.img_url}}" class="img-rounded" width="85%" height="85%"/>
+                <img src="{{dataItem.img}}" class="img-rounded" width="85%" height="85%"/>
             </div>
             <div class="col-lg-9">
-                <h3>{{dataItem.price_formatted}}</h3>
+                <h3>{{dataItem.price}}</h3>
                 <h4>{{dataItem.title}}</h4>
 
                 <p>{{dataItem.summary}}</p>

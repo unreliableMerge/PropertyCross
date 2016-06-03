@@ -5,13 +5,11 @@ angular.module('initialState').component('initialState', {
     controller: function InitialStateController($http, $location, dataServiceFactory) {
         var self = this;
 
-        self.searchInput = 'leeds';
         self.noResult = false;
         self.data = {
             responsedData: [],
             commonPageInformation: dataStoring.readInputRequest()
-        } 
-
+        }
 
         self.favesClickHandler = function () {
             $location.path('/favourites-list');
@@ -29,6 +27,8 @@ angular.module('initialState').component('initialState', {
             });
         };
 
-        self.myLocationClickHandler = function () {        };
+        self.myLocationClickHandler = function () {
+            
+        };
     }
 });

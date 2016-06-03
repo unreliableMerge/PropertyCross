@@ -12,5 +12,16 @@ angular.module('resultDetails').component('resultDetails', {
                 self.data = responsedData;
             })
         }
+
+        self.addToFavouritesList = function () {
+            dataStoring.addFavouritesItem(self.data.responsedData.price_formatted,
+                self.data.responsedData.title,
+                self.data.commonPageInformation.currentCity,
+                self.data.responsedData.bedroom_number,
+                self.data.responsedData.bathroom_number,
+                self.data.responsedData.summary,
+                self.data.responsedData.img_url)
+            //price, location, city, beds, bathrooms, summary, img
+        }
     }]
 });
