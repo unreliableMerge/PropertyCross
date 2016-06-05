@@ -35,7 +35,7 @@
                         Recent search:
                     </h4>
                     <select multiple="false" class="form-control">
-                        <option ng-repeat="item in $ctrl.data.commonPageInformation">{{item.requestName}}
+                        <option ng-repeat="item in $ctrl.data.commonPageInformation" ng-click="$ctrl.goClickHandler(item.requestName)">{{item.requestName}}
                             ({{item.totalResults}})
                         </option>
                     </select>

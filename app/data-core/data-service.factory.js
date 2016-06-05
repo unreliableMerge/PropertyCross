@@ -12,16 +12,14 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
         const PAGE_NUMBER = '&page=';
         const PLACE_NAME = '&place_name=';
 
-
-        var _dataResponse = function (inputSearch, pageNumber) {
-            var requestName = inputSearch;
+        var _dataResponse = function (requestName, pageNumber) {
             return $http.jsonp(NESTORIA_API_URL +
                     PAGE_NUMBER + pageNumber +
                     PLACE_NAME + requestName)
                 .then(function (response) {
                     searchingData.responsedData = response.data.response.listings;
                     if (searchingData.responsedData.length > 0) {
-                        dataStoring.addInputRequest(inputSearch,
+                        dataStoring.addInputRequest(requestName,
                             response.data.response.page,
                             response.data.response.total_pages,
                             response.data.response.total_results,
@@ -30,7 +28,7 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
                             response.data.request.num_res
                         );
                         searchingData.commonPageInformation = ({
-                            requestName: inputSearch,
+                            requestName: requestName,
                             currentPage: response.data.response.page,
                             totalPages: response.data.response.total_pages,
                             totalResults: response.data.response.total_results,
@@ -88,6 +86,5 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
             responsedData: _responsedData,
             getResponsedDataByIndex: _getResponsedDataByIndex
         }
-
     }
 ]);

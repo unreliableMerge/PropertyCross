@@ -3,23 +3,24 @@ var dataStoring = (function () {
     var _favouritesItems = [];
     var _inputRequests = [];
 
-    function _addFavouritesItem(price, location, city, beds, bathrooms, summary, img) {
+    function _addFavouritesItem(data, checkSum) {
         _favouritesItems.push({
+            checkSum: checkSum,
             id: getCurrentFavouritesItemId(),
-            price: price,
-            location: location,
-            city: city,
-            beds: beds,
-            bathrooms: bathrooms,
-            summary: summary,
-            img: img
+            price: data.price,
+            location: data.location,
+            city: data.city,
+            beds: data.beds,
+            bathrooms: data.bathrooms,
+            summary: data.summary,
+            img: data.img
         })
         _saveFavouritesItem.call(this);
     }
 
-    function _deleteFavouritesItem(id) {
+    function _deleteFavouritesItem(checkSum) {
         _favouritesItems.forEach(function (e, index) {
-            if (e.id == id) {
+            if (e.checkSum == checkSum) {
                 _favouritesItems.splice(index, 1);
             }
         })
@@ -125,8 +126,8 @@ var dataStoring = (function () {
         favouritesItems: _favouritesItems,
         inputRequests: _inputRequests,
         addFavouritesItem: _addFavouritesItem,
-        updateSearchingResult: _updateFavouritesItem,
-        removeSearchingResult: _deleteFavouritesItem,
+        updateFavouritesItem: _updateFavouritesItem,
+        deleteFavouritesItem: _deleteFavouritesItem,
         saveFavouritesItem: _saveFavouritesItem,
         getFromStorageFavouritesItems: _getFromStorageFavouritesItems,
         addInputRequest: _addInputRequest,

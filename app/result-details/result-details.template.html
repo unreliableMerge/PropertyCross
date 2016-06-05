@@ -6,10 +6,10 @@
                     <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Back
                 </button>
                 Property Details
-                <button class="btn btn-primary pull-right col-lg-2" ng-show="!$ctrl.lastLocation && $ctrl.alreadyAdded" ng-click="$ctrl.addToFavouritesList()">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add to faves
+                <button class="btn btn-primary pull-right col-lg-2" ng-show="!$ctrl.lastLocation && !$ctrl.alreadyAdded" ng-click="$ctrl.addToFavouritesList()">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>Add to faves
                 </button>
-                <button class="btn btn-primary pull-right col-lg-2" ng-show="!$ctrl.alreadyAdded" ng-click="$ctrl.deleteFromFavouritesList()">
+                <button class="btn btn-primary pull-right col-lg-2" ng-show="$ctrl.alreadyAdded" ng-click="$ctrl.deleteFromFavouritesList($ctrl.checkSum)">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Remove from faves
                 </button>
             </h1>
