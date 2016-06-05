@@ -8,11 +8,16 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
             commonPageInformation: {}
         };
 
+        const NESTORIA_API_URL = 'http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&callback=JSON_CALLBACK';
+        const PAGE_NUMBER = '&page=';
+        const PLACE_NAME = '&place_name=';
 
-        var _dataResponse = function (inputSearch, pageNumber) {            
+
+        var _dataResponse = function (inputSearch, pageNumber) {
             var requestName = inputSearch;
-            return $http.jsonp('http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=' + pageNumber +
-                '&place_name=' + requestName + '&callback=JSON_CALLBACK')
+            return $http.jsonp(NESTORIA_API_URL +
+                    PAGE_NUMBER + pageNumber +
+                    PLACE_NAME + requestName)
                 .then(function (response) {
                     searchingData.responsedData = response.data.response.listings;
                     if (searchingData.responsedData.length > 0) {
@@ -41,9 +46,9 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
         var _responsedData = function () {
             var takeFromLocaleStorage = dataStoring.readInputRequest();
             if (searchingData.responsedData.length == 0) {
-                return $http.jsonp('http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=' +
-                    takeFromLocaleStorage[takeFromLocaleStorage.length - 1].currentPage + '&place_name=' +
-                    takeFromLocaleStorage[takeFromLocaleStorage.length - 1].requestName + '&callback=JSON_CALLBACK')
+                return $http.jsonp(NESTORIA_API_URL +
+                        PAGE_NUMBER + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].currentPage +
+                        PLACE_NAME + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].requestName)
                     .then(function (response) {
                         searchingData.responsedData = response.data.response.listings;
                         searchingData.commonPageInformation = takeFromLocaleStorage[takeFromLocaleStorage.length - 1];
@@ -67,9 +72,9 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
                 return _data;
             }
             else {
-                return $http.jsonp('http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=' +
-                    takeFromLocaleStorage[takeFromLocaleStorage.length - 1].currentPage + '&place_name=' +
-                    takeFromLocaleStorage[takeFromLocaleStorage.length - 1].requestName + '&callback=JSON_CALLBACK')
+                return $http.jsonp(NESTORIA_API_URL +
+                        PAGE_NUMBER + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].currentPage +
+                        PLACE_NAME + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].requestName)
                     .then(function (response) {
                         _data.responsedData = response.data.response.listings[index];
                         _data.commonPageInformation = takeFromLocaleStorage[takeFromLocaleStorage.length - 1];

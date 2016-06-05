@@ -2,12 +2,15 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="text-center">
-                <button class="btn btn-primary pull-left" onclick="window.history.back()">
+                <button class="btn btn-primary pull-left col-lg-1" onclick="window.history.back()">
                     <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Back
                 </button>
                 Property Details
-                <button class="btn btn-primary pull-right" ng-hide="$ctrl.lastLocation" ng-click="$ctrl.addToFavouritesList()">
+                <button class="btn btn-primary pull-right col-lg-2" ng-show="!$ctrl.lastLocation && $ctrl.alreadyAdded" ng-click="$ctrl.addToFavouritesList()">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add to faves
+                </button>
+                <button class="btn btn-primary pull-right col-lg-2" ng-show="!$ctrl.alreadyAdded" ng-click="$ctrl.deleteFromFavouritesList()">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Remove from faves
                 </button>
             </h1>
         </div>
@@ -24,12 +27,12 @@
                 <h4>{{$ctrl.dataForView.location}}, {{$ctrl.dataForView.city}}</h4>
 
                 <p>
-                    {{$ctrl.dataForView.bedroom >= 2 ?
-                    $ctrl.dataForView.bedroom.toString() + ' beds' :
-                    $ctrl.dataForView.bedroom.toString() + ' bed'}},
-                    {{$ctrl.dataForView.bathroom >= 2 ?
-                    $ctrl.dataForView.bathroom.toString() + ' bathrooms' :
-                    $ctrl.dataForView.bathroom.toString() + ' bathroom'}}
+                    {{$ctrl.dataForView.beds >= 2 ?
+                    $ctrl.dataForView.beds.toString() + ' beds' :
+                    $ctrl.dataForView.beds.toString() + ' bed'}},
+                    {{$ctrl.dataForView.bathrooms >= 2 ?
+                    $ctrl.dataForView.bathrooms.toString() + ' bathrooms' :
+                    $ctrl.dataForView.bathrooms.toString() + ' bathroom'}}
                 </p>
 
                 <p/>
