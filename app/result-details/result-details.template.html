@@ -6,7 +6,7 @@
                     <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Back
                 </button>
                 Property Details
-                <button class="btn btn-primary pull-right" ng-click="$ctrl.addToFavouritesList()">
+                <button class="btn btn-primary pull-right" ng-hide="$ctrl.lastLocation" ng-click="$ctrl.addToFavouritesList()">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add to faves
                 </button>
             </h1>
@@ -16,26 +16,26 @@
     <div class="row">
         <div class="well col-lg-12" style="margin-right: 90px;">
             <div class="col-lg-5">
-                <img src="{{$ctrl.data.responsedData.img_url}}" class="img-rounded"/>
+                <img src="{{$ctrl.dataForView.img}}" class="img-rounded"/>
             </div>
 
             <div class="col-lg-7">
-                <h3>{{$ctrl.data.responsedData.price_formatted}}</h3>
-                <h4>{{$ctrl.data.responsedData.title}}, {{$ctrl.data.commonPageInformation.currentCity}}</h4>
+                <h3>{{$ctrl.dataForView.price}}</h3>
+                <h4>{{$ctrl.dataForView.location}}, {{$ctrl.dataForView.city}}</h4>
 
                 <p>
-                    {{$ctrl.data.responsedData.bedroom_number >= 2 ?
-                    $ctrl.data.responsedData.bedroom_number.toString() + ' beds' :
-                    $ctrl.data.responsedData.bedroom_number.toString() + ' bed'}},
-                    {{$ctrl.data.responsedData.bathroom_number >= 2 ?
-                    $ctrl.data.responsedData.bathroom_number.toString() + ' bathrooms' :
-                    $ctrl.data.responsedData.bathroom_number.toString() + ' bathroom'}}
+                    {{$ctrl.dataForView.bedroom >= 2 ?
+                    $ctrl.dataForView.bedroom.toString() + ' beds' :
+                    $ctrl.dataForView.bedroom.toString() + ' bed'}},
+                    {{$ctrl.dataForView.bathroom >= 2 ?
+                    $ctrl.dataForView.bathroom.toString() + ' bathrooms' :
+                    $ctrl.dataForView.bathroom.toString() + ' bathroom'}}
                 </p>
 
                 <p/>
 
                 <p>
-                    {{$ctrl.data.responsedData.summary}}
+                    {{$ctrl.dataForView.summary}}
                 </p>
             </div>
         </div>

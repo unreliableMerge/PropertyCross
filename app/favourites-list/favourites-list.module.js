@@ -1,4 +1,4 @@
 'use strict';
 
 angular.
-    module('favouritesList',['dataService']);
+module('favouritesList', ['dataService']);

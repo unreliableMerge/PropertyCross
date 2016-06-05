@@ -10,11 +10,12 @@ angular.module('searchResults').component('searchResults', {
         if (self.data.responsedData == undefined) {
             dataServiceFactory.responsedData().then(function (responsedData) {
                 self.data = responsedData;
+                self.paginationButtonClickHandler(self.data.commonPageInformation.currentPage);
             });
         }
 
         self.paginationButtonClickHandler = function (pageNumber) {
-            dataServiceFactory.dataResponse(self.data.commonPageInformation.recentSearchName, pageNumber).then(function (responsedData) {
+            dataServiceFactory.dataResponse(self.data.commonPageInformation.requestName, pageNumber).then(function (responsedData) {
                     self.data = responsedData;
 
                     if (self.data.responsedData.length == 0) {
@@ -22,6 +23,20 @@ angular.module('searchResults').component('searchResults', {
                     }
                 }
             )
+        }
+    },
+    resolve: {
+        prevRoutePromiseGetter: function ($q, $rootScope) {
+            var deferred = $q.defer();
+            var dereg = $rootScope.$on('$routeChangeSuccess',
+                function (evt, next, prev) {
+                    dereg();
+                    deferred.resolve((prev.originalPath || '').substr(1));
+                }
+            );
+            return function () {
+                return deferred.promise;
+            };
         }
     }
 });

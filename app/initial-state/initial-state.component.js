@@ -5,6 +5,7 @@ angular.module('initialState').component('initialState', {
     controller: function InitialStateController($http, $location, dataServiceFactory) {
         var self = this;
 
+        self.searchInput = 'eastwood';
         self.noResult = false;
         self.data = {
             responsedData: [],

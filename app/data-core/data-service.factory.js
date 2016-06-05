@@ -25,7 +25,7 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
                             response.data.request.num_res
                         );
                         searchingData.commonPageInformation = ({
-                            recentSearchName: inputSearch,
+                            requestName: inputSearch,
                             currentPage: response.data.response.page,
                             totalPages: response.data.response.total_pages,
                             totalResults: response.data.response.total_results,
@@ -53,7 +53,7 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
             return searchingData;
         };
 
-        var _getResponsedDataByIndex = function (index, pageNumber) {
+        var _getResponsedDataByIndex = function (index) {
             var _data = {
                 responsedData: {},
                 commonPageInformation: {}

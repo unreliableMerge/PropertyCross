@@ -1,4 +1,4 @@
 'use strict';
 
 angular.
-    module('initialState',['dataService']);
+module('initialState', ['dataService']);
