@@ -15,8 +15,8 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
 
         var _dataResponse = function (requestName, pageNumber) {
             return $http.jsonp(NESTORIA_API_URL +
-                    PAGE_NUMBER + pageNumber +
-                    PLACE_NAME + requestName)
+                PAGE_NUMBER + pageNumber +
+                PLACE_NAME + requestName)
                 .then(function (response) {
                     searchingData.responsedData = response.data.response.listings;
                     if (searchingData.responsedData.length > 0) {
@@ -46,8 +46,8 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
             var takeFromLocaleStorage = dataStoring.readInputRequest();
             if (searchingData.responsedData.length == 0) {
                 return $http.jsonp(NESTORIA_API_URL +
-                        PAGE_NUMBER + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].currentPage +
-                        PLACE_NAME + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].requestName)
+                    PAGE_NUMBER + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].currentPage +
+                    PLACE_NAME + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].requestName)
                     .then(function (response) {
                         searchingData.responsedData = response.data.response.listings;
                         searchingData.commonPageInformation = takeFromLocaleStorage[takeFromLocaleStorage.length - 1];
@@ -72,8 +72,8 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
             }
             else {
                 return $http.jsonp(NESTORIA_API_URL +
-                        PAGE_NUMBER + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].currentPage +
-                        PLACE_NAME + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].requestName)
+                    PAGE_NUMBER + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].currentPage +
+                    PLACE_NAME + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].requestName)
                     .then(function (response) {
                         _data.responsedData = response.data.response.listings[index];
                         _data.commonPageInformation = takeFromLocaleStorage[takeFromLocaleStorage.length - 1];
@@ -81,25 +81,37 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
                     });
             }
         };
+        var _getCountryByCoordinates = function (latitude, longitude) {
+           //latitude = '53.1974175';  // for GB searching
+           // longitude = '-3.431481';
+            return $http.get('http://maps.googleapis.com/maps/api/geocode/json?&sensor=false&language=en&encoding=json&callback=JSON_CALLBACK&latlng=' + latitude + ',' + longitude).then(function (response) {
+                var data = response.data.results[1];
+                for (var i = 0; i < data.address_components.length; i++) {
+                    if (data.address_components[i].types[0] == "country") {
+                        var country = data.address_components[i];
+                    }
+                }
+                return country;
+            })
+        };
 
         var _getPlaceNameByCoordinates = function (latitude, longitude) {
-            var abc = '';
-            // &centre_point=
-             latitude = '53.1974175';
-                 longitude='-3.431481';
-            $http.jsonp(NESTORIA_API_URL + CENTRE_POINT + latitude +','+ longitude).
-            then(function (response) {
-                abc = response.data.response.locations[response.data.response.locations.length - 1].title;
-
-                return abc;
+            //latitude = '53.1974175';    // for GB searching
+            //longitude = '-3.431481';
+            return $http.jsonp(NESTORIA_API_URL + CENTRE_POINT + latitude + ',' + longitude).then(function (response) {
+                if (response.data.response.application_response_text != "unknown location") {
+                    var locationName = response.data.response.locations[response.data.response.locations.length - 1].title;
+                    return _dataResponse(locationName);
+                }
             });
-        }
+        };
 
         return {
             dataResponse: _dataResponse,
             responsedData: _responsedData,
             getResponsedDataByIndex: _getResponsedDataByIndex,
-            getPlaceNameByCoordinates: _getPlaceNameByCoordinates
+            getPlaceNameByCoordinates: _getPlaceNameByCoordinates,
+            getCountryByCoordinates: _getCountryByCoordinates
         }
     }
 ]);
