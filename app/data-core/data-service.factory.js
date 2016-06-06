@@ -11,6 +11,7 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
         const NESTORIA_API_URL = 'http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&callback=JSON_CALLBACK';
         const PAGE_NUMBER = '&page=';
         const PLACE_NAME = '&place_name=';
+        const CENTRE_POINT = '&centre_point=';
 
         var _dataResponse = function (requestName, pageNumber) {
             return $http.jsonp(NESTORIA_API_URL +
@@ -81,10 +82,24 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
             }
         };
 
+        var _getPlaceNameByCoordinates = function (latitude, longitude) {
+            var abc = '';
+            // &centre_point=
+             latitude = '53.1974175';
+                 longitude='-3.431481';
+            $http.jsonp(NESTORIA_API_URL + CENTRE_POINT + latitude +','+ longitude).
+            then(function (response) {
+                abc = response.data.response.locations[response.data.response.locations.length - 1].title;
+
+                return abc;
+            });
+        }
+
         return {
             dataResponse: _dataResponse,
             responsedData: _responsedData,
-            getResponsedDataByIndex: _getResponsedDataByIndex
+            getResponsedDataByIndex: _getResponsedDataByIndex,
+            getPlaceNameByCoordinates: _getPlaceNameByCoordinates
         }
     }
 ]);
