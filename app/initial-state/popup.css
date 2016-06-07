@@ -1,4 +1,4 @@
-.b-popup {
+.open-popup {
     width: 100%;
     min-height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
@@ -7,7 +7,7 @@
     top: 0px;
 }
 
-.b-popup .b-popup-content {
+.open-popup .open-popup-content {
     margin: 200px auto 0px auto;
     width: 500px;
     height: 250px;
@@ -16,7 +16,31 @@
     box-shadow: 0px 0px 10px #000;
 }
 
-#map {
-    width: 500px;
-    height: 400px;
+.mapView {
+    height: 550px;
+    width: 768px;
+}
+
+.map-popup {
+    width: 100%;
+    min-height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    position: fixed;
+    top: 0px;
+}
+
+.map-popup .map-popup-content {
+    margin: 100px auto 0px auto;
+    height: 650px;
+    width: 800px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #000;
+}
+
+.infoWindowContent {
+    font-size:  14px !important;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
 }
