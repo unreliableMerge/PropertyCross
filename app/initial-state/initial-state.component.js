@@ -130,7 +130,6 @@ angular.module('initialState').component('initialState', {
             }
         }
 
-
         google.maps.event.addListener(self.map, "click", function (e) {
             self.latitude = e.latLng.lat();
             self.longitude = e.latLng.lng();
