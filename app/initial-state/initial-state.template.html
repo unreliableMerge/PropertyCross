@@ -4,7 +4,9 @@
             <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">Menu</button>
             <div class="menu">
                 <ul aria-expanded="false" class="nav-menu">
-                    <li class="page_item page-item-1 pull-right" ng-click="$ctrl.favesClickHandler()"><a>Faves</a></li>
+                    <button class="pull-right" ng-click="$ctrl.favesClickHandler()"><i
+                            class="glyphicon glyphicon-star-empty"></i>Faves
+                    </button>
                 </ul>
             </div>
         </nav>
@@ -12,51 +14,51 @@
     <div class="site-branding">
         <h1 class="site-title"><a>Property Cross</a>
         </h1>
-        <h2 style="text-align: justify" class="site-description">
-            Use the form below to search for houses to buy.
-            <p> You can search by place-name, postcode, or click "My location", to search in your current location.</p>
-        </h2>
+
+        <div class="entry-wrapper" style="text-align: justify" class="site-description">
+            <h4 style="text-transform: none; margin-top: 45px"> Use the form below to search for houses to buy.
+                <p> You can search by place-name, postcode, or click "My location", to search in your current
+                    location.</p></h4>
+        </div>
     </div>
-    <div class="entry-content" style="margin-top: 60px;">
-        <input type="text" class="form-control" style="height: 48px;" focus="true"
+    <div class="entry-content" style="margin-top: 15px;">
+        <input type="text" style="height: 48px; width: 100%" focus="true"
                placeholder="Search for..."
                ng-model="$ctrl.searchInput"/>
-        <div style="margin-top: 20px;">
-            <button class="pushbutton-wide" style="margin-right: 10px"
+
+        <div style="margin-top: 10px;">
+            <button style="margin-right: 10px"
                     ng-click="$ctrl.goClickHandler($ctrl.searchInput)">Go
             </button>
-            <button class="pushbutton-wide" ng-click="$ctrl.popUp()">My location
+            <button ng-click="$ctrl.popUp()">My location
             </button>
         </div>
-        <div style="margin-top:80px">
+        <div style="margin-top:40px">
             <div ng-if="$ctrl.noResult == false">
-                <h4 style="margin-top: 20px">
+                <h4 style="margin-top: 10px; text-transform: none;">
                     Recent search:
                 </h4>
-                <select multiple="false" class="form-control">
-                    <option ng-repeat="item in $ctrl.data.commonPageInformation"
-                            ng-click="$ctrl.goClickHandler(item.requestName)">{{item.requestName}}
+                <select multiple="false" style="width:100%; overflow:auto; height: 200px;">
+                    <option style="margin: 5px" ng-repeat="item in $ctrl.data.commonPageInformation"
+                            ng-dblclick="$ctrl.goClickHandler(item.requestName)">{{item.requestName}}
                         ({{item.totalResults}})
                     </option>
                 </select>
             </div>
             <div ng-if="$ctrl.noResult == true">
-                <div class="alert alert-danger" style="margin-top: 80px;">
+                <div class="alertDng">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <h4>There was a problem with your search</h4>
+                    <h4 style="margin:40px">There was a problem with your search</h4>
                 </div>
             </div>
         </div>
     </div>
-
     <footer class="site-footer"/>
-
 </div>
-
 
 <div class="open-popup" ng-show="$ctrl.openPopup">
     <div class="open-popup-content">
-        <div class="panel panel-heading">
+        <div class="panel panel-heading" style="background: #515151">
             <a href="#" class="close" data-dismiss="b" aria-label="close">&times;</a>
 
             <h3 class="text-center">What's happened?</h3>
@@ -69,13 +71,12 @@
             </p>
 
             <div class="row" style="margin-top: 30px">
-                <button class="btn btn-success col-sm-5" style="margin-left: 30px"
+                <button class="greenBtn col-sm-5" style="margin-left: 30px"
                         ng-click="$ctrl.openGBMapClickHandler()">Choose location
-                    on the map
                 </button>
-                <button class="btn btn-warning col-sm-5 pull-right" style="margin-right: 30px"
+                <button class="yellowBtn col-sm-5 pull-right" style="margin-right: 30px"
                         ng-click="$ctrl.myLocationClickHandler()">Continue anyway?
-                </button>
+                </button> <!--#5cb85c green #f0ad4e yellow-->
             </div>
         </div>
     </div>
@@ -83,7 +84,7 @@
 
 <div class="map-popup" ng-show="$ctrl.openMapPopup">
     <div class="map-popup-content">
-        <div class="panel panel-heading">
+        <div class="panel panel-heading" style="background: #515151">
             <a href="#" class="close" data-dismiss="b" aria-label="close">&times;</a>
 
             <h3 class="text-center">Choose any location in the Greate Britain</h3>
@@ -92,10 +93,10 @@
             <div style="margin: 20px">
                 <div class="row" style="margin-top: 30px">
                     <div>
-                        <button class="btn btn-success col-sm-5" style="margin-left: 30px"
+                        <button class="col-sm-5 greenBtn" style="margin-left: 30px"
                                 ng-click="$ctrl.applyLocation()">Apply location
                         </button>
-                        <button class="btn btn-danger col-sm-5 pull-right" style="margin-right: 30px"
+                        <button class="col-sm-5 redBtn pull-right" style="margin-right: 30px"
                                 ng-click="$ctrl.deleteMarker()">Delete marker
                         </button>
                     </div>

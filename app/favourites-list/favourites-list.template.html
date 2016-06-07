@@ -1,29 +1,39 @@
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
+<div class="container fill-height" style="width: 970px;">
+    <div class="navigation-wrapper">
+        <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">Menu</button>
+            <div class="menu">
+                <ul aria-expanded="false" class="nav-menu">
+                    <button class="pull-left" onclick="window.history.back()">
+                        <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Back
+                    </button>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+
+    <h2 class="text-center">Favourites</h2>
+
+    <div class="row" style="padding-left:15px; padding-right: 15px;">
+        <div ng-if="$ctrl.data.length == 0">
             <h1 class="text-center">
-                <button class="btn btn-primary pull-left" onclick="window.history.back()">
-                    <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Back
-                </button>
-                    Favourites
+                There is nothing to show
+                <p>Add something</p>
             </h1>
         </div>
-    </div>
-    <div class="row">
-        <div class="well col-lg-12" style="margin-right: 90px;" ng-repeat="dataItem in $ctrl.data">
-            <div class="col-lg-3">
-                <img src="{{dataItem.img}}" class="img-rounded" width="85%" height="85%"/>
-            </div>
-            <div class="col-lg-9">
-                <h3>{{dataItem.price}}</h3>
-                <h4>{{dataItem.title}}</h4>
-
-                <p>{{dataItem.summary}}</p>
-
-                <div class="bottom-align-text">
-                    <a href="#!/result-details/{{$index}}">Property details...</a>
+        <div ng-repeat="dataItem in $ctrl.data">
+        <a href="#!/result-details/{{$index}}">
+            <div class="wellBordered col-lg-12">
+                <div class="col-lg-3">
+                    <img src="{{dataItem.img}}" class="img-rounded"/>
+                </div>
+                <div class="col-lg-9">
+                    <h3>{{dataItem.price}}</h3>
+                    <h4>{{dataItem.location}}</h4>
                 </div>
             </div>
+        </a>
         </div>
     </div>
 </div>

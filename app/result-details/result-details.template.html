@@ -1,23 +1,30 @@
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="text-center">
-                <button class="btn btn-primary pull-left col-lg-1" onclick="window.history.back()">
-                    <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Back
-                </button>
-                Property Details
-                <button class="btn btn-primary pull-right col-lg-2" ng-show="!$ctrl.lastLocation && !$ctrl.alreadyAdded" ng-click="$ctrl.addToFavouritesList()">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>Add to faves
-                </button>
-                <button class="btn btn-primary pull-right col-lg-2" ng-show="$ctrl.alreadyAdded" ng-click="$ctrl.deleteFromFavouritesList($ctrl.checkSum)">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Remove from faves
-                </button>
-            </h1>
-        </div>
+<div class="container fill-height" style="width: 970px;">
+    <div class="navigation-wrapper">
+        <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">Menu</button>
+            <div class="menu">
+                <ul aria-expanded="false" class="nav-menu">
+                    <button class="pull-left" onclick="window.history.back()">
+                        <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Back
+                    </button>
+                    <button class="greenBtn pull-right" style="width: 250px" ng-show="!$ctrl.lastLocation && !$ctrl.alreadyAdded"
+                            ng-click="$ctrl.addToFavouritesList()">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>Add to faves
+                    </button>
+                    <button class="redBtn pull-right" style="width: 250px" ng-show="$ctrl.alreadyAdded"
+                            ng-click="$ctrl.deleteFromFavouritesList($ctrl.checkSum)">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Remove from faves
+                    </button>
+                </ul>
+            </div>
+        </nav>
     </div>
+    <h2 class="text-center">
+        Property Details
+    </h2>
 
-    <div class="row">
-        <div class="well col-lg-12" style="margin-right: 90px;">
+    <div class="row" style="padding-left:15px; padding-right: 15px;">
+        <div class="wellBordered col-lg-12">
             <div class="col-lg-5">
                 <img src="{{$ctrl.dataForView.img}}" class="img-rounded"/>
             </div>
