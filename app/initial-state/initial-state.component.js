@@ -11,6 +11,13 @@ angular.module('initialState').component('initialState', {
             commonPageInformation: dataStoring.readInputRequest()
         };
 
+        self.map = new google.maps.Map(document.getElementById("googleMap"), {
+            center: new google.maps.LatLng(54.463863, -3.228947),
+            zoom: 6,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+
+        });
+
         self.popUp = function () {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
@@ -64,19 +71,21 @@ angular.module('initialState').component('initialState', {
                 });
             } else {
                 handleLocationError(false, infoWindow, map.getCenter());
-            }
-        };
-
-        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-            infoWindow.setPosition(pos);
-            infoWindow.setContent(browserHasGeolocation ?
-                'Error: The Geolocation service failed.' :
-                'Error: Your browser doesn\'t support geolocation.');
+            };
         };
 
         self.openGBMapClickHandler = function () {
             self.openMapPopup = true;
             self.openPopup = false;
+            setTimeout(function () {
+                google.maps.event.trigger(self.map, 'resize');
+                self.map.fitBounds();
+            }, 100);
+            google.maps.event.addListener(self.map, "click", function (e) {
+                self.latitude = e.latLng.lat();
+                self.longitude = e.latLng.lng();
+                placeMarker(e.latLng);
+            });
         };
 
         self.applyLocation = function () {
@@ -86,7 +95,7 @@ angular.module('initialState').component('initialState', {
 
                 if (self.data == undefined || self.data.responsedData.length == 0) {
                     return self.noResult = true;
-                }
+                };
 
                 $location.path('/search-results');
             });
@@ -99,24 +108,12 @@ angular.module('initialState').component('initialState', {
             }
         };
 
-
-        // map
-        // properties
-        // region
-
-        var mapProperties = {
-            center: new google.maps.LatLng(54.463863, -3.228947),
-            zoom: 6,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(browserHasGeolocation ?
+                'Error: The Geolocation service failed.' :
+                'Error: Your browser doesn\'t support geolocation.');
         };
-
-        self.map = new google.maps.Map(document.getElementById("googleMap"), mapProperties);
-        //google.maps.event.addListenerOnce(self.map, 'tilesloaded', function () {
-        //    google.maps.event.addListenerOnce(self.map, 'tilesloaded', function () {
-        //        google.maps.event.trigger(self.map, 'resize');
-        //    });
-        //});
 
         function placeMarker(location) {
             if (self.marker) {
@@ -128,12 +125,6 @@ angular.module('initialState').component('initialState', {
                     draggable: true
                 });
             }
-        }
-
-        google.maps.event.addListener(self.map, "click", function (e) {
-            self.latitude = e.latLng.lat();
-            self.longitude = e.latLng.lng();
-            placeMarker(e.latLng);
-        });
+        };
     }
 });

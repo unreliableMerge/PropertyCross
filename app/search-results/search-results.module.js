@@ -1,4 +1,3 @@
 'use strict';
 
-angular.
-module('searchResults', ['dataService']);
+angular.module('searchResults', ['dataService']);
