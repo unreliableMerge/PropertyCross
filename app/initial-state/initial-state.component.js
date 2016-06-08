@@ -71,7 +71,8 @@ angular.module('initialState').component('initialState', {
                 });
             } else {
                 handleLocationError(false, infoWindow, map.getCenter());
-            };
+            }
+            ;
         };
 
         self.openGBMapClickHandler = function () {
@@ -95,7 +96,7 @@ angular.module('initialState').component('initialState', {
 
                 if (self.data == undefined || self.data.responsedData.length == 0) {
                     return self.noResult = true;
-                };
+                }
 
                 $location.path('/search-results');
             });

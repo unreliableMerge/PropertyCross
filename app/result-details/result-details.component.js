@@ -75,7 +75,7 @@ angular.module('resultDetails').component('resultDetails', {
         };
 
         self.deleteFromFavouritesList = function (checkSum) {
-           dataStoring.deleteFavouritesItem(checkSum);
+            dataStoring.deleteFavouritesItem(checkSum);
             self.alreadyAdded = false;
         }
     }]

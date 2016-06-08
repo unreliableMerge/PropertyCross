@@ -15,8 +15,8 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
 
         var _dataResponse = function (requestName, pageNumber) {
             return $http.jsonp(NESTORIA_API_URL +
-                    PAGE_NUMBER + pageNumber +
-                    PLACE_NAME + requestName)
+                PAGE_NUMBER + pageNumber +
+                PLACE_NAME + requestName)
                 .then(function (response) {
                     searchingData.responsedData = response.data.response.listings;
                     if (searchingData.responsedData.length > 0) {
@@ -46,8 +46,8 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
             var takeFromLocaleStorage = dataStoring.readInputRequest();
             if (searchingData.responsedData.length == 0) {
                 return $http.jsonp(NESTORIA_API_URL +
-                        PAGE_NUMBER + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].currentPage +
-                        PLACE_NAME + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].requestName)
+                    PAGE_NUMBER + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].currentPage +
+                    PLACE_NAME + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].requestName)
                     .then(function (response) {
                         searchingData.responsedData = response.data.response.listings;
                         searchingData.commonPageInformation = takeFromLocaleStorage[takeFromLocaleStorage.length - 1];
@@ -72,8 +72,8 @@ angular.module("dataService").factory("dataServiceFactory", ['$http',
             }
             else {
                 return $http.jsonp(NESTORIA_API_URL +
-                        PAGE_NUMBER + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].currentPage +
-                        PLACE_NAME + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].requestName)
+                    PAGE_NUMBER + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].currentPage +
+                    PLACE_NAME + takeFromLocaleStorage[takeFromLocaleStorage.length - 1].requestName)
                     .then(function (response) {
                         _data.responsedData = response.data.response.listings[index];
                         _data.commonPageInformation = takeFromLocaleStorage[takeFromLocaleStorage.length - 1];
