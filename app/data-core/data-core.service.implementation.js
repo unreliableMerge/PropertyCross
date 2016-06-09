@@ -102,7 +102,7 @@ var dataCoreService = function ($http) {
                 return _dataResponse(locationName);
             }
         });
-    };
+    };    
 
     return {
         dataResponse: _dataResponse,

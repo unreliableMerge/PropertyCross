@@ -48,6 +48,7 @@ angular.module('initialState').component('initialState', {
 
         self.myLocationClickHandler = function () {
             self.openPopup = false;
+            self.loader = true;
             self.deleteMarker();
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
@@ -55,10 +56,12 @@ angular.module('initialState').component('initialState', {
                         self.data = response;
 
                         if (self.data == undefined || self.data.responsedData.length == 0) {
+                            self.loader = false;
                             return self.noResult = true;
                         }
 
                         $location.path('/search-results');
+                        self.loader = false;
                     });
                 }, function () {
                     handleLocationError(true, infoWindow, map.getCenter());
@@ -79,7 +82,7 @@ angular.module('initialState').component('initialState', {
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
 
             });
-
+            self.deleteMarker();
             setTimeout(function () {
                 google.maps.event.trigger(self.map, 'resize');
                 self.map.setCenter(new google.maps.LatLng(54.463863, -3.228947));
@@ -93,14 +96,17 @@ angular.module('initialState').component('initialState', {
 
         self.applyLocation = function () {
             self.openMapPopup = false;
+            self.loader = true;
             dataCoreService.getPlaceNameByCoordinates(self.latitude, self.longitude).then(function (response) {
                 self.data = response;
 
                 if (self.data == undefined || self.data.responsedData.length == 0) {
+                    self.loader = false;
                     return self.noResult = true;
                 }
 
                 $location.path('/search-results');
+                self.loader = false;
             });
         };
 

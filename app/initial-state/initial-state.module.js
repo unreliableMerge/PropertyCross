@@ -1,3 +1,4 @@
 'use strict';
 
-angular.module('initialState', ['dataCoreService']);
+angular.
+    module('initialState', ['dataCoreService']);

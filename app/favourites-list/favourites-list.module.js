@@ -1,3 +1,4 @@
 'use strict';
 
-angular.module('favouritesList', ['dataCoreService']);
+angular.
+    module('favouritesList', ['dataCoreService']);

@@ -5,9 +5,9 @@ var dataCoreStoringService = (function () {
     var _favouritesItems = [];
     var _inputRequests = [];
 
-    function _addFavouritesItem(data, checkSum) {
+    function _addFavouritesItem(data, advertisementId) {
         _favouritesItems.push({
-            checkSum: checkSum,
+            advertisementId: advertisementId,
             id: getCurrentFavouritesItemId(),
             price: data.price,
             location: data.location,
@@ -20,9 +20,9 @@ var dataCoreStoringService = (function () {
         _saveFavouritesItem.call(this);
     }
 
-    function _deleteFavouritesItem(checkSum) {
+    function _deleteFavouritesItem(advertisementId) {
         _favouritesItems.forEach(function (e, index) {
-            if (e.checkSum == checkSum) {
+            if (e.advertisementId == advertisementId) {
                 _favouritesItems.splice(index, 1);
             }
         })
@@ -123,6 +123,10 @@ var dataCoreStoringService = (function () {
         if (!_inputRequests || _inputRequests.length == 0) return 0;
         else return _inputRequests[_inputRequests.length - 1].id + 1;
     }
+    
+    function _getAdvertisementId(id) {
+        return id.match(/\d{25}/)[0];
+    }
 
     return {
         favouritesItems: _favouritesItems,
@@ -135,6 +139,7 @@ var dataCoreStoringService = (function () {
         addInputRequest: _addInputRequest,
         updateInputRequest: _updateInputRequest,
         saveInputRequest: _saveInputRequest,
-        readInputRequest: _readInputRequest
+        readInputRequest: _readInputRequest,
+        getAdvertisementId: _getAdvertisementId
     };
 })();
