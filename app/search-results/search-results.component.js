@@ -2,19 +2,19 @@
 
 angular.module('searchResults').component('searchResults', {
     templateUrl: 'search-results/search-results.template.html',
-    controller: function SearchingController(dataServiceFactory) {
+    controller: function SearchingController(dataCoreService) {
         var self = this;
-        self.data = dataServiceFactory.responsedData();
+        self.data = dataCoreService.responsedData();
 
         if (self.data.responsedData == undefined) {
-            dataServiceFactory.responsedData().then(function (responsedData) {
+            dataCoreService.responsedData().then(function (responsedData) {
                 self.data = responsedData;
                 self.paginationButtonClickHandler(self.data.commonPageInformation.currentPage);
             });
         }
 
         self.paginationButtonClickHandler = function (pageNumber) {
-            dataServiceFactory.dataResponse(self.data.commonPageInformation.requestName, pageNumber).then(function (responsedData) {
+            dataCoreService.dataResponse(self.data.commonPageInformation.requestName, pageNumber).then(function (responsedData) {
                     self.data = responsedData;
 
                     if (self.data.responsedData.length == 0) {

@@ -1,4 +1,6 @@
-var dataStoring = (function () {
+'use strict';
+
+var dataCoreStoringService = (function () {
 
     var _favouritesItems = [];
     var _inputRequests = [];

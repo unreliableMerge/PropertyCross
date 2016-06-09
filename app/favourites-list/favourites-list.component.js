@@ -2,9 +2,8 @@
 
 angular.module('favouritesList').component('favouritesList', {
     templateUrl: 'favourites-list/favourites-list.template.html',
-    controller: function FavouritesListController(dataServiceFactory) {
+    controller: function FavouritesListController(dataCoreService) {
         var self = this;
-        self.data = dataStoring.getFromStorageFavouritesItems();
-
+        self.data = dataCoreStoringService.getFromStorageFavouritesItems;
     }
 });

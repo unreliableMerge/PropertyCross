@@ -2,26 +2,19 @@
 
 angular.module('initialState').component('initialState', {
     templateUrl: 'initial-state/initial-state.template.html',
-    controller: function InitialStateController($http, $location, dataServiceFactory) {
+    controller: function InitialStateController($http, $location, dataCoreService) {
         var self = this;
         self.marker;
         self.noResult = false;
         self.data = {
             responsedData: [],
-            commonPageInformation: dataStoring.readInputRequest()
+            commonPageInformation: dataCoreStoringService.readInputRequest()
         };
-
-        self.map = new google.maps.Map(document.getElementById("googleMap"), {
-            center: new google.maps.LatLng(54.463863, -3.228947),
-            zoom: 6,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-
-        });
 
         self.popUp = function () {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
-                    dataServiceFactory.getCountryByCoordinates(position.coords.latitude, position.coords.longitude).then(function (response) {
+                    dataCoreService.getCountryByCoordinates(position.coords.latitude, position.coords.longitude).then(function (response) {
                         if (response != undefined) {
                             self.country = response;
                             if (self.country.short_name != 'GB') {
@@ -42,7 +35,7 @@ angular.module('initialState').component('initialState', {
         };
 
         self.goClickHandler = function (input) {
-            dataServiceFactory.dataResponse(input).then(function (responsedData) {
+            dataCoreService.dataResponse(input).then(function (responsedData) {
                 self.data = responsedData;
 
                 if (self.data.responsedData.length == 0) {
@@ -55,9 +48,10 @@ angular.module('initialState').component('initialState', {
 
         self.myLocationClickHandler = function () {
             self.openPopup = false;
+            self.deleteMarker();
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
-                    dataServiceFactory.getPlaceNameByCoordinates(position.coords.latitude, position.coords.longitude).then(function (response) {
+                    dataCoreService.getPlaceNameByCoordinates(position.coords.latitude, position.coords.longitude).then(function (response) {
                         self.data = response;
 
                         if (self.data == undefined || self.data.responsedData.length == 0) {
@@ -78,9 +72,17 @@ angular.module('initialState').component('initialState', {
         self.openGBMapClickHandler = function () {
             self.openMapPopup = true;
             self.openPopup = false;
+
+            self.map = new google.maps.Map(document.getElementById("googleMap"), {
+                center: new google.maps.LatLng(54.463863, -3.228947),
+                zoom: 6,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+
+            });
+
             setTimeout(function () {
                 google.maps.event.trigger(self.map, 'resize');
-                self.map.fitBounds();
+                self.map.setCenter(new google.maps.LatLng(54.463863, -3.228947));
             }, 100);
             google.maps.event.addListener(self.map, "click", function (e) {
                 self.latitude = e.latLng.lat();
@@ -91,7 +93,7 @@ angular.module('initialState').component('initialState', {
 
         self.applyLocation = function () {
             self.openMapPopup = false;
-            dataServiceFactory.getPlaceNameByCoordinates(self.latitude, self.longitude).then(function (response) {
+            dataCoreService.getPlaceNameByCoordinates(self.latitude, self.longitude).then(function (response) {
                 self.data = response;
 
                 if (self.data == undefined || self.data.responsedData.length == 0) {

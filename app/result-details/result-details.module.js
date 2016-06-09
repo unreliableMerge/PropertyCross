@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('resultDetails', ['dataService']);
+angular.module('resultDetails', ['dataCoreService']);
