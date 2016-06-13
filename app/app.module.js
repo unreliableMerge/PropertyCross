@@ -2,7 +2,7 @@
 
 angular.
     module('propertyCrossWebApp', [
-           'ngRoute',
+           'ui.router',
            'initialState',
            'searchResults',
            'resultDetails',
