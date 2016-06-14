@@ -1,0 +1,27 @@
+<div class="row" style="padding-left:15px; padding-right: 15px;">
+    <div class="wellBordered col-lg-12">
+        <div class="col-lg-5">
+            <img src="{{$ctrl.dataForView.img}}" class="img-rounded"/>
+        </div>
+
+        <div class="col-lg-7">
+            <h3>{{$ctrl.dataForView.price}}</h3>
+            <h4>{{$ctrl.dataForView.location}}, {{$ctrl.dataForView.city}}</h4>
+
+            <p>
+                {{$ctrl.dataForView.beds >= 2 ?
+                $ctrl.dataForView.beds.toString() + ' beds' :
+                $ctrl.dataForView.beds.toString() + ' bed'}},
+                {{$ctrl.dataForView.bathrooms >= 2 ?
+                $ctrl.dataForView.bathrooms.toString() + ' bathrooms' :
+                $ctrl.dataForView.bathrooms.toString() + ' bathroom'}}
+            </p>
+
+            <p/>
+
+            <p>
+                {{$ctrl.dataForView.summary}}
+            </p>
+        </div>
+    </div>
+</div>

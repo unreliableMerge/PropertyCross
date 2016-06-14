@@ -4,8 +4,9 @@ angular.
     module('favouritesList').
     component('favouritesList', {
         templateUrl: 'favourites-list/favourites-list.template.html',
-        controller: function FavouritesListController() {
+        controller: function FavouritesListCtrl() {
             var self = this;
+            self.lastLocation = true;
             self.data = dataCoreStoringService.getFromStorageFavouritesItems();
         }
 });

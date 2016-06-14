@@ -3,13 +3,13 @@
 angular.
     module('resultDetails').
     component('resultDetails', {
-        templateUrl: 'result-details/result-details.template.html',
-        controller: ['$state', 'dataCoreService', function ResultDetailsController($stateProvider, dataCoreService) {
+        templateUrl: 'common-partials/result-details/result-details.template.html',
+        controller: ['$state', 'dataCoreService', function ResultDetailsCtrl($stateProvider, dataCoreService) {
             var self = this;
             self.localKeeper = dataCoreStoringService.getFromStorageFavouritesItems();
             self.alreadyAdded = false;
 
-            $stateProvider.$current.locals.globals.PreviousState.Name == 'favourites-list' ? self.lastLocation = true : self.lastLocation = false;
+            $stateProvider.$current.locals.globals.PreviousState.Name == 'favouritesList' ? self.lastLocation = true : self.lastLocation = false;
 
             if (self.lastLocation) {
                 self.dataForView = self.localKeeper[$stateProvider.params.index];
@@ -58,7 +58,6 @@ angular.
                     })
                 }
             }
-
 
             self.addToFavouritesList = function () {
                 self.dataForView = {

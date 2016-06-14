@@ -4,9 +4,10 @@ angular.
     module('searchResults').
     component('searchResults', {
         templateUrl: 'search-results/search-results.template.html',
-        controller: function SearchingController(dataCoreService) {
+        controller: function SearchingCtrl(dataCoreService) {
             var self = this;
             self.data = dataCoreService.responsedData();
+            self.lastLocation = true;
     
             if (self.data.responsedData == undefined) {
                 dataCoreService.responsedData().then(function (responsedData) {
@@ -24,20 +25,6 @@ angular.
                         }
                     }
                 )
-            }
-        },
-        resolve: {
-            prevRoutePromiseGetter: function ($q, $rootScope) {
-                var deferred = $q.defer();
-                var dereg = $rootScope.$on('$routeChangeSuccess',
-                    function (evt, next, prev) {
-                        dereg();
-                        deferred.resolve((prev.originalPath || '').substr(1));
-                    }
-                );
-                return function () {
-                    return deferred.promise;
-                };
             }
         }
 });

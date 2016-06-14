@@ -1,0 +1,20 @@
+<div class="navigation-wrapper">
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+        <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">Menu</button>
+        <div class="menu">
+            <ul aria-expanded="false" class="nav-menu">
+                <button class="pull-left" onclick="window.history.back()">
+                    <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Back
+                </button>
+                <button class="greenBtn pull-right" style="width: 250px" ng-show="!$ctrl.lastLocation && !$ctrl.alreadyAdded"
+                        ng-click="$ctrl.addToFavouritesList()">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>Add to faves
+                </button>
+                <button class="redBtn pull-right" style="width: 250px" ng-show="$ctrl.alreadyAdded"
+                        ng-click="$ctrl.deleteFromFavouritesList($ctrl.advertisementId)">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Remove from faves
+                </button>
+            </ul>
+        </div>
+    </nav>
+</div>
