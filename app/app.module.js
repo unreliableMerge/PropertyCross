@@ -6,6 +6,7 @@ angular.
            'initialState',
            'searchResults',
            'resultDetails',
-           'favouritesList'
+           'favouritesList',
+           'ngAnimate'
         ]);
 
