@@ -1,0 +1,19 @@
+<div style="margin-top:40px">
+    <div ng-if="$ctrl.noResult == false">
+        <h4 style="margin-top: 10px; text-transform: none;">
+            Recent search:
+        </h4>
+        <select multiple="false" style="width:100%; overflow:auto; height: 250px;">
+            <option style="margin: 5px" ng-repeat="item in $ctrl.data.commonPageInformation"
+                    ng-dblclick="$ctrl.goClickHandler(item.requestName)">{{item.requestName}}
+                ({{item.totalResults}})
+            </option>
+        </select>
+    </div>
+    <div ng-if="$ctrl.noResult == true">
+        <div class="alertDng">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <h4 style="margin:40px">There was a problem with your search</h4>
+        </div>
+    </div>
+</div>

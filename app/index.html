@@ -22,28 +22,29 @@
               type='text/css' media='all'/>
 
         <!--data-layer-->
-        <script src="data-core/data-core.service.implementation.js"></script>
-        <script src="data-core/data-core.module.js"></script>
-        <script src="data-core/data-core.service.js"></script>
-        <script src="data-core/data-core-storing/data-core-storing.service.implementation.js"></script>
-        <script src="data-core/data-core-storing/data-core-storing.module.js"></script>
-        <script src="data-core/data-core-storing/data-core-storing.service.js"></script>
+        <script src="data-core-service/data-core.service.implementation.js"></script>
+        <script src="data-core-service/data-core.module.js"></script>
+        <script src="data-core-service/data-core.service.js"></script>
+        <script src="data-core-service/data-core-storing-service/data-core-storing.service.implementation.js"></script>
+        <script src="data-core-service/data-core-storing-service/data-core-storing.module.js"></script>
+        <script src="data-core-service/data-core-storing-service/data-core-storing.service.js"></script>
 
         <!--app-->
         <script src="app.module.js"></script>
         <script src="app.config.js"></script>
         <script src="initial-state/initial-state.module.js"></script>
         <script src="initial-state/initial-state.component.js"></script>
-        <script src="search-results/search-results.module.js"></script>
-        <script src="search-results/search-results.component.js"></script>
-        <script src="result-details/result-details.module.js"></script>
-        <script src="result-details/result-details.component.js"></script>
-        <script src="favourites-list/favourites-list.module.js"></script>
-        <script src="favourites-list/favourites-list.component.js"></script>
+        <script src="initial-state/search-results/search-results.module.js"></script>
+        <script src="initial-state/search-results/search-results.component.js"></script>
+        <script src="initial-state/search-results/result-details/result-details.module.js"></script>
+        <script src="initial-state/search-results/result-details/result-details.component.js"></script>
+        <script src="initial-state/favourites-list/favourites-list.module.js"></script>
+        <script src="initial-state/favourites-list/favourites-list.component.js"></script>
 
     </head>
 
     <body class="body fill-height">
-        <div ui-view></div>
+            <div ui-view></div>
+        </div>
     </body>
 </html>

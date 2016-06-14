@@ -2,7 +2,7 @@
 
 angular.module('initialState').component('initialState', {
     templateUrl: 'initial-state/initial-state.template.html',
-    controller: function InitialStateController($http, $location, dataCoreService) {
+    controller: function InitialStateCtrl($http, $location, dataCoreService) {
         var self = this;
         self.marker;
         self.noResult = false;

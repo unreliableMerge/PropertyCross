@@ -1,61 +1,8 @@
 <div class="container fill-height" style="width: 970px;">
-    <div class="navigation-wrapper">
-        <nav id="site-navigation" class="main-navigation" role="navigation">
-            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">Menu</button>
-            <div class="menu">
-                <ul aria-expanded="false" class="nav-menu">
-                    <button class="pull-right" ng-click="$ctrl.favesClickHandler()"><i
-                            class="glyphicon glyphicon-star-empty"></i>Faves
-                    </button>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <div class="site-branding">
-        <h1 class="site-title"><a>Property Cross</a>
-        </h1>
-
-        <div class="entry-wrapper" style="text-align: justify" class="site-description">
-            <h4 style="text-transform: none; margin-top: 45px"> Use the form below to search for houses to buy.
-                <p> You can search by place-name, postcode, or click "My location", to search in your current
-                    location.</p></h4>
-        </div>
-    </div>
-    <div class="entry-content" style="margin-top: 15px;">
-        <input type="text" style="height: 48px; width: 100%" focus="true"
-               placeholder="Search for..."
-               ng-model="$ctrl.searchInput"/>
-        <div class="overlay" ng-show="$ctrl.loader">
-            <div class="loader">Loading...</div>
-        </div>
-        <div style="margin-top: 10px;">
-            <button style="margin-right: 10px"
-                    ng-click="$ctrl.goClickHandler($ctrl.searchInput)">Go
-            </button>
-            <button ng-click="$ctrl.popUp()">My location
-            </button>
-        </div>
-        <div style="margin-top:40px">
-            <div ng-if="$ctrl.noResult == false">
-                <h4 style="margin-top: 10px; text-transform: none;">
-                    Recent search:
-                </h4>
-                <select multiple="false" style="width:100%; overflow:auto; height: 250px;">
-                    <option style="margin: 5px" ng-repeat="item in $ctrl.data.commonPageInformation"
-                            ng-dblclick="$ctrl.goClickHandler(item.requestName)">{{item.requestName}}
-                        ({{item.totalResults}})
-                    </option>
-                </select>
-            </div>
-            <div ng-if="$ctrl.noResult == true">
-                <div class="alertDng">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <h4 style="margin:40px">There was a problem with your search</h4>
-                </div>
-            </div>
-        </div>
-    </div>
-    <footer class="site-footer"/>
+    <div ui-view="header"></div>
+    <div ui-view="searching"></div>
+    <div ui-view="recentResults"></div>
 </div>
 
-
+<div ui-view="popupOpen"></div>
+<div ui-view="popupMap"></div>

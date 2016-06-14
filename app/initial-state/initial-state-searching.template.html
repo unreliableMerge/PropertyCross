@@ -1,0 +1,16 @@
+<div class="entry-content" style="margin-top: 15px;">
+    <input type="text" style="height: 48px; width: 100%" focus="true"
+           placeholder="Search for..."
+           ng-model="$ctrl.searchInput"/>
+    <div class="overlay" ng-show="$ctrl.loader">
+        <div class="loader">Loading...</div>
+    </div>
+    <div style="margin-top: 10px;">
+        <button style="margin-right: 10px"
+                ng-click="$ctrl.goClickHandler($ctrl.searchInput)">Go
+        </button>
+        <button ng-click="$ctrl.popUp()">My location
+        </button>
+    </div>
+
+</div>
