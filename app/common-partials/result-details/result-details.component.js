@@ -60,6 +60,7 @@ angular.
             }
 
             self.addToFavouritesList = function () {
+                self.alreadyAdded = true;
                 self.dataForView = {
                     price: self.data.responsedData.price_formatted,
                     location: self.data.responsedData.title,
@@ -71,12 +72,12 @@ angular.
                 }
                 self.advertisementId = dataCoreStoringService.getAdvertisementId(self.data.responsedData.lister_url);
                 dataCoreStoringService.addFavouritesItem(self.dataForView, self.advertisementId);
-                self.alreadyAdded = true;
             };
 
             self.deleteFromFavouritesList = function (advertisementId) {
-                dataCoreStoringService.deleteFavouritesItem(advertisementId);
                 self.alreadyAdded = false;
+                dataCoreStoringService.deleteFavouritesItem(advertisementId);
+
             }
         }]
 });

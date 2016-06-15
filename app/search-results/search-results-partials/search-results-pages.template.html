@@ -1,6 +1,6 @@
 
-<div class="row" style="padding-left:15px; padding-right: 15px;">
-    <div ng-repeat="dataItem in $ctrl.data.responsedData">
+<div class="row" style="padding-left:15px; padding-right: 15px;" ng-animate-children>
+    <div ng-repeat="dataItem in $ctrl.data.responsedData" class="result-list">
         <a ng-href="#!/result-details/{{$index}}">
             <div class="wellBordered col-lg-12" style="padding: 20px;">
                 <div class="col-lg-3">

@@ -1,7 +1,7 @@
-<div class="open-popup" ng-show="$ctrl.openPopup">
+<div class="open-popup popup-animation-show" ng-show="$ctrl.openPopup">
     <div class="open-popup-content">
         <div class="panel panel-heading" style="background: #515151">
-            <a href="#" class="close" data-dismiss="b" aria-label="close">&times;</a>
+            <a href="#" class="close" aria-label="close" ng-click="$ctrl.closeModal()">&times;</a>
 
             <h3 class="text-center">What's happened?</h3>
         </div>

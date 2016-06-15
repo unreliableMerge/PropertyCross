@@ -30,6 +30,11 @@ angular.module('initialState').component('initialState', {
             }
         };
 
+        self.closeModal= function (){
+            self.openPopup = false;
+            self.openMapPopup = false;
+        };
+
         self.favesClickHandler = function () {
             $location.path('/favourites-list');
         };

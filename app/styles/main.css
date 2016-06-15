@@ -580,7 +580,8 @@ th {
     border-bottom: 4px solid #313537;
 }
 
-.wellBordered {
+.wellBordered,
+.wellBorderedCurrent {
     font-family: Alegreya Sans, sans-serif;
     font-size: 16px;
     line-height: 1.5;
@@ -598,14 +599,22 @@ th {
 
 }
 
-.wellBordered:hover {
+.wellBorderedCurrent:hover {
     border-color: #313537;
     background-color: #313537;
     box-shadow: #dbdbdb;
 }
+.wellBordered:hover {
+    border-color: #313537;
+    background-color: #313537;
+    box-shadow: #dbdbdb;
+    transform: scale(1.1);
+}
 
 .wellBordered:active,
-.wellBordered:focus {
+.wellBordered:focus,
+.wellBorderedCurrent:active,
+.wellBorderedCurrent:focus{
     border-color: #313537;
     box-shadow: #dbdbdb;
 }

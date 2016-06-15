@@ -1,6 +1,6 @@
 <h2 class="text-center">
     <button class="grayBtn pull-left"
-            ng-disabled="$ctrl.data.commonPageInformation.currentPage == 1 ? true : false "
+            ng-hide="$ctrl.data.commonPageInformation.currentPage == 1 ? true : false "
             ng-click="$ctrl.paginationButtonClickHandler($ctrl.data.commonPageInformation.currentPage-1)">
         <span class="glyphicon glyphicon-step-backward" aria-hidden="true"/>
     </button>
@@ -14,7 +14,7 @@
             </span>
 
     <button class="grayBtn pull-right"
-            ng-disabled="$ctrl.data.commonPageInformation.currentPage == $ctrl.data.commonPageInformation.totalPages+1 ? true : false"
+            ng-hide="$ctrl.data.commonPageInformation.currentPage == $ctrl.data.commonPageInformation.totalPages+1 ? true : false"
             ng-click="$ctrl.paginationButtonClickHandler($ctrl.data.commonPageInformation.currentPage+1)">
         <span class="glyphicon glyphicon-step-forward" aria-hidden="true"/>
     </button>

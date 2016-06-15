@@ -5,13 +5,18 @@
         <title>Property Cross</title>
 
         <!--common libs-->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+
         <script src="http://maps.googleapis.com/maps/api/js?&language=en&region=GB"></script>
         <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
         <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
         <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
         <link href="bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet"/>
+        <link href="styles/app.animations.css" rel="stylesheet" />
         <link href="styles/main.css" rel="stylesheet"/>
+
         <link rel='stylesheet' id='escutcheon-fonts-css'
               href='https://fonts.googleapis.com/css?family=Oswald%3A400%2C300%2C700%7CAlegreya+Sans%3A400%2C400italic%2C700%2C700italic&#038;subset=latin%2Clatin-ext'
               type='text/css' media='all'/>
@@ -20,6 +25,11 @@
               media='print'/>
         <link rel='stylesheet' id='all-css-4' href='https://s1.wp.com/wp-content/themes/h4/global.css?m=1420737423h'
               type='text/css' media='all'/>
+
+        <!--animations-->
+
+
+
 
         <!--data-layer-->
         <script src="data-core-service/data-core.service.implementation.js"></script>
@@ -32,6 +42,7 @@
         <!--app-->
         <script src="app.module.js"></script>
         <script src="app.config.js"></script>
+
         <script src="initial-state/initial-state.module.js"></script>
         <script src="initial-state/initial-state.component.js"></script>
         <script src="search-results/search-results.module.js"></script>
@@ -41,16 +52,10 @@
         <script src="favourites-list/favourites-list.module.js"></script>
         <script src="favourites-list/favourites-list.component.js"></script>
 
-        <!--animations-->
-        <script src="bower_components/jquery/dist/jquery.js"></script>
-        <script src="bower_components/angular-animate/angular-animate.js"></script>
-        <link rel="stylesheet" href="styles/app.animations.css" />
-        <script src="app.animations.js"></script>
 
     </head>
 
     <body class="body fill-height">
-            <div ui-view></div>
-        </div>
+            <div ui-view class="view-frame"></div>
     </body>
 </html>
